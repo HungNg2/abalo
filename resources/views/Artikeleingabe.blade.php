@@ -13,6 +13,7 @@
 
     let form = document.createElement('form');
     form.action = "/articles";
+    //form.action = "/api/articles";
     form.method = "POST";
 
     let nameInput = document.createElement('input');
@@ -50,6 +51,7 @@
         if(form.reportValidity()) {
             let xhr = new XMLHttpRequest();
             xhr.open("POST","/articles");
+            //xhr.open("POST","/api/articles");
             xhr.setRequestHeader('Accept', 'application/json');
             xhr.onreadystatechange = function (){
                 if(xhr.readyState === 4){
@@ -67,6 +69,7 @@
                         xhrResponse.style.color = "red";
                     }
                 }
+                console.log(xhr.response);
             };
             xhr.send(new FormData(form));
         }
