@@ -23,17 +23,27 @@ Route::post('/articles', [
 ]);
 Route::get('/articles', [
     App\Http\Controllers\ArtikelController::class,
-    'SearchArticle',
+    'getArticles',
 ]);
-Route::get('/api/articles', function () {
-    return view('api-articles');
-});
+Route::post('/articlesapi',[
+    \App\Http\Controllers\ArtikelController::class,
+    'store_api',
+]);
+Route::get('/articlesapi', [
+    App\Http\Controllers\ArtikelController::class,
+    'search_api',
+]);
+
+
 /*Route::get('/articles', function () {
     return view('view');
 });*/
-
 Route::get('/newarticle', function () {
     return view('Artikeleingabe');
+});
+Route::get('/newarticleapi', function () {
+    //für M3
+    return view('Artikeleingabeapi');
 });
 
 Route::get('/debug/cookietest', function () {
