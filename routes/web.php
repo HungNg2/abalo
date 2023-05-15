@@ -25,14 +25,14 @@ Route::get('/articles', [
     App\Http\Controllers\ArtikelController::class,
     'getArticles',
 ]);
-Route::post('/articlesapi',[
+/*Route::post('/articlesapi',[
     \App\Http\Controllers\ArtikelController::class,
     'store_api',
 ]);
 Route::get('/articlesapi', [
     App\Http\Controllers\ArtikelController::class,
     'search_api',
-]);
+]);*/
 
 
 /*Route::get('/articles', function () {
@@ -41,10 +41,10 @@ Route::get('/articlesapi', [
 Route::get('/newarticle', function () {
     return view('Artikeleingabe');
 });
-Route::get('/newarticleapi', function () {
+/*Route::get('/newarticleapi', function () {
     //für M3
     return view('Artikeleingabeapi');
-});
+});*/
 
 Route::get('/debug/cookietest', function () {
     return view('cookietest');
