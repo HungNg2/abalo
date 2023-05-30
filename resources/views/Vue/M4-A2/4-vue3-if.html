@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <title>Vue 3 - If</title>
+    <script src="https://unpkg.com/vue@3"></script>
+</head>
+<body>
+<div id="app">
+    <p>{{isdisable ?"Der Webserver ist zurzeit nicht erreichbar":"Der Webserver ist zurzeit erreichbar"}}</p>
+</div>
+<script>
+    let app = Vue.createApp({
+        data(){
+            return{
+                isdisable: true
+            };
+        }
+    }).mount('#app');
+</script>
+</body>
+</html>

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <title>Vue 4 - Input</title>
+    <script src="https://unpkg.com/vue@3"></script>
+</head>
+<body>
+<div id="app">
+    <input type="text" v-model="message">
+    <p>{{ message }}</p>
+</div>
+<script>
+    let app =  Vue.createApp({
+        data() {
+            return {
+                message: 'Hello World!'
+            };
+        }
+    }).mount('#app');
+
+</script>
+</body>
+</html>

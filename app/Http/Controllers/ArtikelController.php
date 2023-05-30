@@ -7,7 +7,7 @@ use mysql_xdevapi\Exception;
 
 class ArtikelController extends Controller
 {
-    public function getArticles(Request $request)
+    public function SearchArticle(Request $request)
     {
         $abarticles = new AbArticle();
         if ($request->search) {
@@ -59,6 +59,7 @@ class ArtikelController extends Controller
         }
         return response()->json($data);
     }
+
     public function store_api(Request $request): string
     {
 
@@ -77,8 +78,6 @@ class ArtikelController extends Controller
         return response()->json([
             'id' => $article->id
         ]);
-       // return 'Der Artikel wurde erfolgreich gespeichertttt';
-
     }
 
     public function _apiDeleteArticle($id): void

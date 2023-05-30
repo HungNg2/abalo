@@ -13,7 +13,8 @@
         <div id="Navigationsmenues"></div>
         <div class="search_item">
             <h2>Search for an Item:&nbsp;</h2>
-            <form method="GET" action="/articlesapi">
+            <!--<form method="GET" action="/articles">-->
+            <form method="GET" action="/api/articles">
                 <input type="text" name="search" value="{{ request('search') }}" placeholder="enter the item name here">
                 <button type="submit">Search</button>
             </form>

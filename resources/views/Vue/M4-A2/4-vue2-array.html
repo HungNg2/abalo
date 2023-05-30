@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <title>Vue 2 - Array</title>
+    <script src="https://unpkg.com/vue@3"></script>
+</head>
+<body>
+<div id="Product">
+    <table border="1px">
+        <tr>
+            <th>name</th>
+            <th>price</th>
+        </tr>
+        <tr  v-for="item in objekt">
+            <td>{{ item.name }}</td>
+            <td>{{ item.price }}</td>
+        </tr>
+
+    </table>
+    <button @click="addItem">Artikel hinzufügen</button>
+</div>
+<script>
+    let app =  Vue.createApp({
+        data() {
+            return {
+                objekt: [
+                    {name: "Reifen", price: 8290},
+                    {name: "Antenne drehbar. Leicht geknickt", price: 1400},
+                    {name: "Opel Kadett C 1992 – wie neu", price: 150000},
+                ],
+
+            };
+        },
+        methods:{
+            addItem: function () {
+                this.$data.objekt.push({name: "Radio–UKW", price: 45});
+            }
+        }
+    }).mount('#Product');
+
+</script>
+</body>
+</html>
