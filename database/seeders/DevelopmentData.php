@@ -12,7 +12,7 @@ class DevelopmentData extends Seeder
      * Run the database seeds.
      */
     public function run()
-    {
+    {/*
     $first = true;
     if($handle = fopen("public/data/user.csv","r")){
         while ($data=fgetcsv($handle,1000,";")) {
@@ -69,8 +69,23 @@ class DevelopmentData extends Seeder
                 }
             }
             fclose($handle);
+        }*/
+
+        $firstLine = TRUE;
+        if(($file = fopen("public/data/article_has_articlecategory.csv", "r")) !== FALSE) {
+            while(($data = fgetcsv($file, 1000, ";")) !== FALSE) {
+                if(!$firstLine) {
+                    DB::table('articlehas_article_category')->insert([
+                        'ab_articlecategory_id' => $data[0],
+                        'ab_article_id' => $data[1]
+                    ]);
+                }
+                $firstLine = FALSE;
+            }
+            fclose($file);
         }
-
-
+        else {
+            print("file not found");
+        }
     }
 }

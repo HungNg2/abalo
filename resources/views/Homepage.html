@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Home</title>
+    <link rel="stylesheet" href="{{asset('css/article.css')}}">
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+</head>
+<body>
+    <div id="app">
+        <site-header></site-header><br>
+        <!--<site-body></site-body><br>-->
+        <site-footer></site-footer><br>
+    </div>
+
+    <script type="text/x-template" id="site-header-template">
+        <div id="Navigationsmenues"></div>
+    </script>
+
+    <script type="module">
+        import SiteHeader from './Vue/Components/siteheader.js';
+        //import SiteBody from './Vue/Components/sitebody.js';
+        import SiteFooter from './Vue/Components/sitefooter.js';
+        let app = Vue.createApp({
+            components: {
+                SiteHeader,
+                SiteFooter
+            }
+        }).mount('#app');
+    </script>
+</body>
+</html>

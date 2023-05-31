@@ -28,5 +28,10 @@ Route::get('/3-ajax2-periodic', function () {
     return view('3-ajax2-periodic');
 });
 
+/** Route for M4
+*/
 
+Route::get('/newsite', function () {
+    return view('Homepage');
+});
 
