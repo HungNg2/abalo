@@ -12,7 +12,6 @@ Route::get('/articles', [App\Http\Controllers\ArtikelController::class, 'SearchA
 /*Route::get('/articles', function () { return view('view');});*/
 
 Route::get('/newarticle', function () {return view('Artikeleingabe');});
-Route::get('/4-vue7-component', function () {return view('Vue/M4-A7/4-vue7-component');});
 Route::get('/debug/cookietest', function () {return view('cookietest');});
 
 Route::get('/debug/sessions', function () {return view('debugsessions');});

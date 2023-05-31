@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>4-vue8-component-interaction</title>
+    <script src="https://unpkg.com/vue@3"></script>
+</head>
+<body>
+<div id="app">
+    <click-counter></click-counter>
+    <click-counter-item :ClickCounterItem="ClickCounter"></click-counter-item>
+</div>
+<script type="module">
+    import ClickCounter from './4-vue8-component-interaction.js';
+    import ClickCounterItem from './4-vue8-component-interaction-2.js';
+
+    let Vm = Vue.createApp({
+         components: {
+             ClickCounter,
+             ClickCounterItem
+         }
+    }).mount('#app')
+</script>
+</body>
+</html>
