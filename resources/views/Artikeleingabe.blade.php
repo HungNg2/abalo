@@ -10,7 +10,6 @@
 </div>
 <script>
     "use strict"
-// Test die Änderung2
     let form = document.createElement('form');
     //form.action = "/articles";
     form.action = "/api/articles";

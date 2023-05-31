@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Artikeln</title>
+    <script src="https://unpkg.com/vue@3"></script>
     <link rel="stylesheet" href="{{asset('css/article.css')}}">
 </head>
 <body>
@@ -14,12 +15,14 @@
         <div class="search_item">
             <h2>Search for an Item:&nbsp;</h2>
             <!--<form method="GET" action="/articles">-->
-            <form method="GET" action="/api/articles">
-                <input type="text" name="search" value="{{ request('search') }}" placeholder="enter the item name here">
-                <button type="submit">Search</button>
-            </form>
+            <!--<form method="GET" action="/api/articles">-->
+                <input type="text" v-model="search" @keyup="loadArticles" value="search"><br>
+                <!--<button type="button" @click="loadArticles">Search</button>-->
+           <!-- <button type="submit">Search</button>-->
+           <!-- </form>-->
             <br>
         </div>
+
     </div>
     <div class="popup">
         <img src="shopping-cart-1985.png" width="50px" onclick="popUpFunction()">
@@ -38,6 +41,7 @@
         <br>
     </div>
 <div class="body">
+
     <h1>List of Articles</h1>
         <table id="Article_table">
                 <thead>
@@ -82,8 +86,35 @@
                 </tbody>
         </table>
 </div>
+
     <script src="{{asset('js/shopingcart.js')}}"></script>
     @include("patterns/cookieform")
     <script src="{{asset('/js/Navigation.js')}}"></script>
+    <script>
+        Vue.createApp({
+            data(){
+                return{
+                    search: "",
+                    items: [],
+                };
+            },
+            methods: {
+                loadArticles() {
+                    console.log("search: "+ this.search);
+                    if (this.search.length >2) {
+                        fetch(`http://localhost:8000/api/articles?search=${this.search}`)
+                            .then(response => response.json())
+                            .then(data => {
+                                console.log(data);
+                                this.items = data;
+                            })
+                            .catch(error => console.log(error.message));
+                    }
+                }
+            }
+
+        }).mount('.search_item');
+
+    </script>
 </body>
 </html>
