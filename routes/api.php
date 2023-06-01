@@ -22,6 +22,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
  * */
 Route::get('/articles',[\App\Http\Controllers\ArtikelController::class ,'search_api']);
 Route::Post('/articles',[\App\Http\Controllers\ArtikelController::class ,'store_api']);
+Route::get('/articles2',[\App\Http\Controllers\ArtikelController::class ,'search_offset']);
 
 Route::delete('/articles/{id}', [App\Http\Controllers\ArtikelController::class, '_apiDeleteArticle',]);
 

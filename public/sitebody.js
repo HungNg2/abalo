@@ -5,11 +5,14 @@ export default {
 
     data(){
         return{
-            items: []
+            search: "",
+            items: [],
+            offset: 0,
+            currentpage: 1
         };
     },
     methods: {
-        loadArticles() {
+       /* loadArticles() {
                 fetch(`http://localhost:8000/api/articles`)
                     .then(response => response.json())
                     .then(data => {
@@ -17,7 +20,7 @@ export default {
                         this.items = data;
                     })
                     .catch(error => console.log(error.message));
-        },
+        },*/
         getImageUrl(id, extension) {
             return `./articelimages/${id}.${extension}`;
         },
@@ -32,11 +35,54 @@ export default {
                 };
                 img.src = this.getImageUrl(id, extension);
             });
-        }
+        },
+        loadArticles() {
+            if (this.search.length > 2) {
+                fetch(
+                    `http://localhost:8000/api/articles2?search=${this.search}&offset=${this.offset}`
+                )
+                    .then((data) => data.json())
+                    .then((data) => {
+                        console.log(data);
+                        this.items = data;
+                    })
+                    .catch((err) => console.log(err.message));
+            } else {
+                fetch(`http://localhost:8000/api/articles?offset=${this.offset}`)
+                    .then((data) => data.json())
+                    .then((data) => {
+                        console.log(data);
+                        this.items = data.slice(this.offset, this.offset + 5); // Show only the items for the current page
+                    })
+                    .catch((err) => console.log(err.message));
+            }
+        },
+        setoffset(offset) {
+            //setoffset(){
+            //this.offset+=5;
+            this.offset = offset;
+        },
+        offsetplus() {
+            if (this.items.length > 2) {
+                this.offset += 5;
+                this.currentpage++;
+            }
+        },
+        offsetminus() {
+            this.offset -= 5;
+            if (this.currentpage >= 1)
+                this.currentpage--;
+        },
+
 
     },
     template: `<div class="body"  v-model="loadArticles">
-    <h1>List of Articles</h1>
+    <div class="search_item">
+        <h2>Search for an Item:&nbsp;</h2>
+        <input type="text" v-model="search" v-on:keyup="loadArticles" v-on:change="loadArticles"><br><br>
+        <br>
+    </div>
+        <h1>List of Articles</h1>
     <table id="Article_table">
         <thead>
         <tr>
@@ -47,7 +93,6 @@ export default {
             <th>ab_creator_id</th>
             <th>ab_created_date</th>
             <th>ab_image</th>
-
         </tr>
         </thead>
         <tbody>
@@ -58,12 +103,20 @@ export default {
             <td>{{ item.ab_description }}</td>
             <td>{{ item.ab_creator_id }}</td>
             <td>{{ item.ab_createdate }}</td>
-            <td>
+            <!--<td>
                 <img v-if="fileExists(item.id)" :src="getImageUrl(item.id, 'jpg')" alt="Image" width="120">
                 <img v-else-if="fileExists(item.id)" :src="getImageUrl(item.id, 'png')" alt="Image" width="120">
-            </td>
+            </td>-->
+                <td><img  v-bind:src="'./articelimages/'+ item.id+'.jpg'" alt="Image" width="120"></td>
+
         </tr>
         </tbody>
     </table>
+    </div>
+    <div >
+    <button v-on:click="offsetminus(); loadArticles()">&lt;</button>
+    {{ currentpage }}
+    <button v-on:click="offsetplus(); loadArticles()">&gt;</button>
     </div>`
+
 }

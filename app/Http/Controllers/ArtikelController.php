@@ -79,6 +79,35 @@ class ArtikelController extends Controller
             'id' => $article->id
         ]);
     }
+    public function search_offset(Request $request)
+    {
+        $offset = $request->get('offset');
+        if ($request->search) {
+            $abarticle = DB::table('ab_article')->select('*')->where('ab_name', 'ILIKE', '%' . $request->search . '%')->limit(5)->offset($offset)->get();
+        } else {
+            $abarticle = DB::table('ab_article')
+                ->select('*')
+                ->limit(5)
+                ->offset($offset)
+                ->get();
+        }
+        $data = [
+
+        ];
+        foreach ($abarticle as $key => $article) {
+            $data[$key] = [
+                'id' => $article->id,
+                'ab_name' => $article->ab_name,
+                'ab_price' => $article->ab_price,
+                'ab_description' => $article->ab_description,
+                'ab_creator_id' => $article->ab_creator_id,
+                'ab_createdate' => $article->ab_createdate,
+            ];
+        }
+        return response()->json($data);
+
+    }
+
 
     public function _apiDeleteArticle($id): void
     {

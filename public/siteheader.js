@@ -7,7 +7,7 @@ export default {
                 item.querySelector('.childList').classList.toggle('active');
             });
         });
-        this.loadArticles();
+        //this.loadArticles();
     },
     data: function () {
         return {
@@ -54,7 +54,7 @@ export default {
             }
             return menu;
         },
-        loadArticles() {
+        /*loadArticles() {
             console.log("search: " + this.search);
             if (this.search.length > 2) {
                 fetch(`http://localhost:8000/api/articles?search=${this.search}`)
@@ -65,7 +65,7 @@ export default {
                     })
                     .catch(error => console.log(error.message));
             }
-        },
+        },*/
         getImageUrl(id, extension) {
             return `./articelimages/${id}.${extension}`;
         },
@@ -80,7 +80,8 @@ export default {
                 };
                 img.src = this.getImageUrl(id, extension);
             });
-        }
+        },
+
     },
     template: `
         <div id="header">
@@ -88,12 +89,12 @@ export default {
             <img src="logo.jpg" width="80px">
         </div>
         <div id="Navigationsmenues"></div>
-        <div class="search_item">
+       <!-- <div class="search_item">
             <h2>Search for an Item:&nbsp;</h2>
             <input type="text" v-model="search" @keyup="loadArticles" value="search"><br> <br>
+        </div>-->
         </div>
-        </div>
-        <table v-if="this.search.length > 2 && items.length > 0">
+        <!--<table v-if="this.search.length > 2 && items.length > 0">
         <thead>
         <tr>
             <th>id</th>
@@ -119,6 +120,6 @@ export default {
             </td>
         </tr>
         </tbody>
-        </table>
+        </table>-->
     `
 }
