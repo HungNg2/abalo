@@ -1,28 +1,28 @@
 'use strict'
 
-/** array contains all cart-element id
- * @type {any[]}
- */
-let CartList = [];
+    /** array contains all cart-element id
+     * @type {any[]}
+     */
+    let CartList = [];
 
-/** div element contains cart table
- * @type {HTMLElement}
- * be hidden when no article in cart
- */
+    /** div element contains cart table
+     * @type {HTMLElement}
+     * be hidden when no article in cart
+     */
 
-let divShoppingCart = document.getElementById("Shopping_Cart");
-let showCart = false;
-let table = document.getElementById('Shopping_Cart');
+    let divShoppingCart = document.getElementById("Shopping_Cart");
+    let showCart = false;
+    let table = document.getElementById('Shopping_Cart');
 
-function popUpFunction() {
-    if(!showCart) {
+    function popUpFunction()
+{
+    if (!showCart) {
         showCart = true;
         if (CartList.length === 0)
             divShoppingCart.style.visibility = "hidden";
         else
             table.style.visibility = "visible";
-    }
-    else {
+    } else {
         showCart = false;
         table.style.visibility = "hidden";
     }
@@ -50,7 +50,7 @@ function shoppingCart(id) {
      * @type {HTMLElement}
      */
     let addButtonColumn = document.getElementById("input" + id);
-    let articleRow = document.getElementById(''+id);
+    let articleRow = document.getElementById('' + id);
 
     /**
      ** add content from the selected article to cart (name, price, image)
@@ -67,7 +67,7 @@ function shoppingCart(id) {
     addButtonColumn.style.visibility = "hidden";
 
     if (addButtonColumn.getAttribute("value") === "+") {
-}
+    }
 
     /** create remove button
      * @type {HTMLInputElement}
@@ -77,7 +77,9 @@ function shoppingCart(id) {
     removeButton.setAttribute("type", "button");
     removeButton.setAttribute("value", "-");
     tdRemove.append(removeButton);
-    removeButton.onclick = function() {remove_from_shopping_cart(id)};
+    removeButton.onclick = function () {
+        remove_from_shopping_cart(id)
+    };
 
     /** add "td" elements to "tr"
      */
@@ -92,7 +94,7 @@ function shoppingCart(id) {
 
     event.preventDefault();
     let xhr = new XMLHttpRequest();
-    xhr.open('POST','/api/shoppingcart');
+    xhr.open('POST', '/api/shoppingcart');
     //xhr.setRequestHeader('Accept', 'application/json');
     xhr.onreadystatechange = function () {
         if (xhr.readyState === 4) {
@@ -113,8 +115,8 @@ function shoppingCart(id) {
 }
 
 /**  function to remove an article from shopping cart
-* @param id of the selected article when click '-' button
-*/
+ * @param id of the selected article when click '-' button
+ */
 function remove_from_shopping_cart(id) {
 
     let xhr = new XMLHttpRequest();
@@ -136,7 +138,7 @@ function remove_from_shopping_cart(id) {
     /** remove a row by removing a <tr> tag
      * */
     let trRemoveItem = document.getElementById("cartElement" + id);
-    cartTable.removeChild(trRemoveItem);
+    this.cartTable.removeChild(trRemoveItem);
 
     /** delete article-id in cart-element array
      * hide the <div> area when ta no article in cart

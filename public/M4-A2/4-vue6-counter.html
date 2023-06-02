@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <title>Vue 6 - Counter</title>
+    <script src="https://unpkg.com/vue@3"></script>
+</head>
+<bod>
+    <div id ="app">
+        <button @click="counter++">+</button>
+        <p>{{ counter }}</p>
+    </div>
+    <script>
+        let app = Vue.createApp({
+            data(){
+                return{
+                    counter: 1
+                };
+            }
+        }).mount('#app');
+    </script>
+</bod>
+</html>

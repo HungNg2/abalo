@@ -7,7 +7,6 @@ export default {
                 item.querySelector('.childList').classList.toggle('active');
             });
         });
-        //this.loadArticles();
     },
     data: function () {
         return {
@@ -86,13 +85,13 @@ export default {
     template: `
         <div id="header">
         <div class="logo">
-            <img src="logo.jpg" width="80px">
+            <img src="../../logo.jpg" width="80px">
         </div>
         <div id="Navigationsmenues"></div>
-       <!-- <div class="search_item">
-            <h2>Search for an Item:&nbsp;</h2>
-            <input type="text" v-model="search" @keyup="loadArticles" value="search"><br> <br>
-        </div>-->
+        <!-- <div class="search_item">
+             <h2>Search for an Item:&nbsp;</h2>
+             <input type="text" v-model="search" @keyup="loadArticles" value="search"><br> <br>
+         </div>-->
         </div>
         <!--<table v-if="this.search.length > 2 && items.length > 0">
         <thead>
