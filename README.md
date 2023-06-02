@@ -1,4 +1,4 @@
-<p align="center"><h2>Author: <br> TienHung Nguyen, 3219156 <br> Vincent Salgado, 3276344 <br> Mohcine Boujraf, 3284933</h2>
+<p align="center"><h2>Author: <br> TienHung Nguyen, 3219156 <br> Mohcine Boujraf, 3284933</h2>
 
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
 
