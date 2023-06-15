@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    // WebSocket-Verbindung herstellen
+    const socket = new WebSocket('ws://127.0.0.1:8080');
+
+    // Event-Handler für die Verbindungsherstellung
+    socket.onopen = function(event) {
+        console.log('Connected');
+    };
+</script>
+</body>
+</html>

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="app">
+    <input id="input" type="text" size="40">
+    <button id="send">Send</button>
+</div>
+<script>
+    // WebSocket-Verbindung herstellen
+    let conn = new WebSocket('ws://localhost:8085/chat');
+
+    // Event-Handler für die Verbindungsherstellung
+    conn.onmessage = function(e) {
+        console.log('Receved',e.data);
+        show('recieved',e.data);
+    };
+    conn.onopen = function (e){
+conn.send('i entred the room');
+    };
+</script>
+</body>
+</html>
