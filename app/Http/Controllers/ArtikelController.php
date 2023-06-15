@@ -75,6 +75,9 @@ class ArtikelController extends Controller
         $article->id = $idmax + 1;
         $article->save();
 
+        /*return response()->json([
+            'id' => $article->id
+        ]);*/
         return response()->json([
             'id' => $article->id
         ]);
@@ -117,4 +120,21 @@ class ArtikelController extends Controller
         else
             throw new Exception('Artikel nicht gefunden');
     }
+    public function makeOffer($id)
+    {
+        $article = AbArticle::findOrFail($id);
+        $msg = [
+            "type" => 'offer',
+            "article_id" => $article->id,
+        ];
+        \Ratchet\Client\connect('ws://localhost:8085/chat')->then(function ($conn) use ($msg) {
+            $msgJSON = json_encode($msg);
+            $conn->send($msgJSON);
+            $conn->close();
+        }, function ($e) {
+            echo "Could not connect: {$e->getMessage()}\n";
+        });
+
+    }
+
 }

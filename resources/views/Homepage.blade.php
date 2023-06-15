@@ -3,8 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <title>Home</title>
-    <link rel="stylesheet" href="{{asset('css/article.css')}}">
+    <!--<link rel="stylesheet" href="asset('css/article.css')}}">-->
+    <!--<link rel="stylesheet" href="asset('css/app.scss')}}">-->
+    @vite(['resources/css/app.scss'])
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script> <!-- Axios einbinden -->
+
 </head>
 <body>
     <div class="app">

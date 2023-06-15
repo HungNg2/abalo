@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <title>Artikeln</title>
     <script src="https://unpkg.com/vue@3"></script>
-    <link rel="stylesheet" href="{{asset('css/article.css')}}">
+    @vite(['resources/css/app.scss'])
+
 </head>
 <body>
     <div id="header">

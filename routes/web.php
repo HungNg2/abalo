@@ -11,7 +11,8 @@ Route::get('/articles', [App\Http\Controllers\ArtikelController::class, 'SearchA
 //Route::get('/articles','App\Http\Controllers\ArtikelController@searchVue');
 /*Route::get('/articles', function () { return view('view');});*/
 
-Route::get('/newarticle', function () {return view('Artikeleingabe');});
+//Route::get('/newarticle', function () {return view('Artikeleingabe');});
+Route::get('/newarticle', function () {return view('Artikeleingabevue');});
 Route::get('/debug/cookietest', function () {return view('cookietest');});
 
 Route::get('/debug/sessions', function () {return view('debugsessions');});
