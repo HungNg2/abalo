@@ -1,6 +1,7 @@
 <?php
 namespace App\Http\Controllers;
 use App\Models\AbArticle;
+use App\Models\AbUser;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use mysql_xdevapi\Exception;
@@ -120,6 +121,7 @@ class ArtikelController extends Controller
         else
             throw new Exception('Artikel nicht gefunden');
     }
+
     public function makeOffer($id)
     {
         $article = AbArticle::findOrFail($id);
@@ -134,7 +136,23 @@ class ArtikelController extends Controller
         }, function ($e) {
             echo "Could not connect: {$e->getMessage()}\n";
         });
+    }
 
+    public function sold_api($id) {
+        $article = AbArticle::findOrFail($id);
+        $user = DB::table('ab_user')->select('*')->where('id', 'ILIKE', $article->ab_creator_id)->get();
+        mail($user->ab_mail, "Article sold","Großartig! Ihr Artikel $article->ab_name wurde erfolgreich verkauf!");
+        //        $msg = [
+//            "type" => 'sold',
+//            "article_id" => $article->id,
+//        ];
+//        \Ratchet\Client\connect('ws://localhost:8085/chat')->then(function ($conn) use ($msg) {
+//            $msgJSON = json_encode($msg);
+//            $conn->send($msgJSON);
+//            $conn->close();
+//        }, function ($e) {
+//            echo "Could not connect: {$e->getMessage()}\n";
+//        });
     }
 
 }

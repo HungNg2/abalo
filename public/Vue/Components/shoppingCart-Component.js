@@ -1,39 +1,36 @@
-class ShoppingCart {
+export default {
     /** array contains all cart-element id
      * @type {any[]}
      */
-    CartList = [];
+    CartList: [],
+    showCart: false,
 
-    /** div element contains cart table
-     * @type {HTMLElement}
-     * be hidden when no article in cart
-     */
+    popUpFunction() {
+        /** div element contains cart table
+         * @type {HTMLElement}
+         * be hidden when no article in cart
+         */
 
-    divShoppingCart = document.getElementById("Shopping_Cart");
-    showCart = false;
-    table = document.getElementById('Shopping_Cart');
-
-    popUpFunction()
-    {
-        if (!showCart) {
-            showCart = true;
-            if (CartList.length === 0)
+        let divShoppingCart = document.getElementById("Shopping_Cart");
+        if (!this.showCart) {
+            this.showCart = true;
+            if (this.CartList.length === 0)
                 divShoppingCart.style.visibility = "hidden";
             else
-                table.style.visibility = "visible";
+                divShoppingCart.style.visibility = "visible";
         } else {
-            showCart = false;
-            table.style.visibility = "hidden";
+            this.showCart = false;
+            divShoppingCart.style.visibility = "hidden";
         }
-    }
-    /** table <tbody> element
-     * */
-    cartTable = document.getElementById("cart");
+    },
 
     /** function to create a table when '+' button was clicked
      * @param id : id of the selected article
      */
     shoppingCart(id) {
+        /** table <tbody> element
+         * */
+        let cartTable = document.getElementById("cart");
         this.CartList.push(id);
         //divShoppingCart.style.visibility = "visible";
 
@@ -65,9 +62,6 @@ class ShoppingCart {
         // hide the already clicked button
         addButtonColumn.style.visibility = "hidden";
 
-        if (addButtonColumn.getAttribute("value") === "+") {
-        }
-
         /** create remove button
          * @type {HTMLInputElement}
          */
@@ -77,8 +71,8 @@ class ShoppingCart {
         removeButton.setAttribute("value", "-");
         tdRemove.append(removeButton);
         removeButton.onclick = function () {
-            remove_from_shopping_cart(id)
-        };
+            this.remove_from_shopping_cart(id);
+        }
 
         /** add "td" elements to "tr"
          */
@@ -89,7 +83,7 @@ class ShoppingCart {
 
         /** add "tr" elements to <table body>
          */
-        this.cartTable.append(new_cartElement);
+        cartTable.append(new_cartElement);
 
         event.preventDefault();
         let xhr = new XMLHttpRequest();
@@ -111,12 +105,21 @@ class ShoppingCart {
         let xhrForm = document.getElementById('form' + id);
         xhr.send(new FormData(xhrForm));
 
-    }
+    },
 
     /**  function to remove an article from shopping cart
      * @param id of the selected article when click '-' button
      */
     remove_from_shopping_cart(id) {
+        /** div element contains cart table
+         * @type {HTMLElement}
+         * be hidden when no article in cart
+         */
+
+        let divShoppingCart = document.getElementById("Shopping_Cart");
+        /** table <tbody> element
+         * */
+        let cartTable = document.getElementById("cart");
 
         let xhr = new XMLHttpRequest();
         xhr.open('DELETE', '/api/shoppingcart/2/articles/' + id);
@@ -144,7 +147,7 @@ class ShoppingCart {
          */
         this.CartList.splice(this.CartList.indexOf(id), 1);
         if (this.CartList.length === 0)
-            this.divShoppingCart.style.visibility = "hidden";
+            divShoppingCart.style.visibility = "hidden";
 
         /** make '+' button visible again
          * give user an option to add to cart again
@@ -152,6 +155,6 @@ class ShoppingCart {
          */
         let addButtonColumn = document.getElementById("input" + id);
         addButtonColumn.style.visibility = "visible";
-    }
+    },
 }
-export {ShoppingCart};
+

@@ -27,12 +27,25 @@
             data: function() {
                 return {
                     ShowImpressum: false,
+                    loginData: null,
                 }
             },
-            methods: {
-                impressum(showImpressum) {
-                    this.ShowImpressum = showImpressum;
-                }
+            // methods: {
+            //     impressum(showImpressum) {
+            //         this.ShowImpressum = showImpressum;
+            //     }
+            // }
+            mounted: function() {
+                axios.get('/getlogin')
+                    .then(response => {
+                        if (response.data['auth'] === "false")
+                            alert("please login first");
+                        console.log(response.data);
+                        this.loginData = response.data;
+                    })
+                    .catch(error => {
+                        console.log(error);
+                    })
             }
         }).mount('.app');
     </script>

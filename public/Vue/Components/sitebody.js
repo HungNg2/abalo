@@ -1,4 +1,4 @@
-import {ShoppingCart} from './shoppingCart-Component.js';
+import ShoppingCart from './shoppingCart-Component.js';
 import Impressum from "./Impressum.js";
 import SiteFooter from "./sitefooter.js";
 
@@ -8,7 +8,7 @@ export default {
     props: ['ShowImpressum'],
     components: {
         Impressum,
-        SiteFooter
+        SiteFooter,
     },
     mounted() {
         this.loadArticles();
@@ -21,7 +21,6 @@ export default {
             offset: 0,
             currentpage: 1,
             ShowImpressum: false,
-            sc: new ShoppingCart(),
         };
     },
     methods: {
@@ -81,7 +80,10 @@ export default {
             }
         },
         shoppingCart(id) {
-            this.sc.shoppingCart(id);
+            ShoppingCart.shoppingCart(id);
+        },
+        popUpFunction() {
+          ShoppingCart.popUpFunction()
         },
         impressum(showImpressum) {
             this.ShowImpressum = showImpressum;
@@ -103,6 +105,12 @@ export default {
                 alert(`Der Artikel ${article.ab_name} wird nun günstiger angeboten! Greifen Sie schnell zu.`);
             }
         },
+        sold(id) {
+            let article = this.items.find(element => element.id === id);
+            if (article) {
+                alert(`Großartig! Ihr Artikel ${article.ab_name} wurde erfolgreich verkauf!`);
+            }
+        },
     },
     created: function () {
         var self = this;
@@ -119,16 +127,20 @@ export default {
             console.log("dataString Type: ",dataString.type);
         if (dataString.type === 'Wartung') {
                 alert("In Kürze verbessern wir Abalo für Sie! Nach einer kurzen Pause sind wir wieder für Sie da! Versprochen.");
-            } else if (dataString.type === 'offer') {
+            } if (dataString.type === 'offer') {
                 console.log("DataString_article_id: ",dataString.article_id);
                 self.Offer(dataString.article_id);
+            }
+        else if (dataString.type === 'sold') {
+            console.log("DataString_article_id: ",dataString.article_id);
+            self.sold(dataString.article_id);
             }
         }
     },
     template: `
     <div v-if="!this.ShowImpressum">
     <div class="popup">
-        <img v-bind:src="'shopping-cart-1985.png'"  width="50px">
+        <button @click="popUpFunction()">Cart</button>
         <table class="popUp_table" id="Shopping_Cart" border="1px">
             <thead>
             <tr>
@@ -165,7 +177,7 @@ export default {
             </tr>
             </thead>
             <tbody>
-            <tr v-for="item in this.items" :key="item.ab_name">
+            <tr v-for="item in this.items" :key="item.ab_name" :id="item.id">
                 <td class="id"> {{ item.id }}</td>
                 <td class="shop-item-title">{{ item.ab_name }}</td>
                 <td class="shop-item-price">{{ item.ab_price }}</td>
@@ -182,7 +194,7 @@ export default {
                         <input type="hidden" name="article" :value="item.id">
                     </form>
                     <button form="form" type="submit"
-                            id="input{{ item.id }}"
+                            :id="'input' + item.id"
                             @click="shoppingCart(item.id)">+
                     </button>
                 </td>

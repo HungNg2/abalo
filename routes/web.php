@@ -3,9 +3,11 @@
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {return view('welcome');});
-Route::get('/login', [App\Http\Controllers\AuthController::class, 'login',])->name('login');
+Route::get('/login/{id}', [App\Http\Controllers\AuthController::class, 'login',])->name('login');
 Route::get('/logout', [App\Http\Controllers\AuthController::class, 'logout',])->name('logout');
 Route::get('/isloggedin', [App\Http\Controllers\AuthController::class, 'isloggedin',])->name('haslogin');
+Route::get('/getlogin', [App\Http\Controllers\AuthController::class, 'loginInformation',])->name('getloginInf');
+
 Route::post('/articles', [App\Http\Controllers\ArtikelController::class, 'store',]);
 Route::get('/articles', [App\Http\Controllers\ArtikelController::class, 'SearchArticle',]);
 //Route::get('/articles','App\Http\Controllers\ArtikelController@searchVue');

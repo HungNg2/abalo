@@ -138,7 +138,7 @@ function remove_from_shopping_cart(id) {
     /** remove a row by removing a <tr> tag
      * */
     let trRemoveItem = document.getElementById("cartElement" + id);
-    this.cartTable.removeChild(trRemoveItem);
+    cartTable.removeChild(trRemoveItem);
 
     /** delete article-id in cart-element array
      * hide the <div> area when ta no article in cart
